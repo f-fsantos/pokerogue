@@ -492,7 +492,7 @@ export abstract class PokemonSpeciesForm {
       cry = null;
     }
     cry = scene.playSound(cry || cryKey, soundConfig);
-    if (ignorePlay) {
+    if (cry && ignorePlay) {
       cry.stop();
     }
     return cry;

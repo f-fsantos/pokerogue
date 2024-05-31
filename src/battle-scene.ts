@@ -1552,12 +1552,17 @@ export default class BattleScene extends SceneBase {
     if ((typeof sound === "string" ? sound : sound.key).startsWith("PRSFX- ")) {
       config["volume"] *= 0.5;
     }
-    if (typeof sound === "string") {
-      this.sound.play(sound, config);
-      return this.sound.get(sound) as AnySound;
-    } else {
-      sound.play(config);
-      return sound;
+    try {
+      if (typeof sound === "string") {
+        this.sound.play(sound, config);
+        return this.sound.get(sound) as AnySound;
+      } else {
+        sound.play(config);
+        return sound;
+      }
+    } catch (e) {
+      console.error(e);
+      return null;
     }
   }
 

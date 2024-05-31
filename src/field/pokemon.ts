@@ -2136,6 +2136,10 @@ export default abstract class Pokemon extends Phaser.GameObjects.Container {
     let duration = cry.totalDuration * 1000;
     if (this.fusionSpecies && this.getSpeciesForm() !== this.getFusionSpeciesForm()) {
       let fusionCry = this.getFusionSpeciesForm().cry(scene, soundConfig, true);
+      if (!fusionCry) {
+        return cry;
+      }
+
       duration = Math.min(duration, fusionCry.totalDuration * 1000);
       fusionCry.destroy();
       scene.time.delayedCall(Utils.fixedInt(Math.ceil(duration * 0.4)), () => {
@@ -2224,6 +2228,12 @@ export default abstract class Pokemon extends Phaser.GameObjects.Container {
     let duration = cry.totalDuration * 1000;
 
     let fusionCry = this.scene.playSound(this.getFusionSpeciesForm().getCryKey(this.fusionFormIndex), { rate: rate }) as AnySound;
+    if (!fusionCry) {
+      if (callback) {
+        callback();
+      }
+      return;
+    }
     fusionCry.stop();
     duration = Math.min(duration, fusionCry.totalDuration * 1000);
     fusionCry.destroy();
