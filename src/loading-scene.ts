@@ -244,7 +244,7 @@ export class LoadingScene extends SceneBase {
     } else {
       this.loadAtlas("types", "");
     }
-    const availableLangs = ["en", "de", "it", "fr", "ja", "ko", "es", "pt", "zh-cn"];
+    const availableLangs = ["en", "de", "it", "fr", "ja", "ko", "es", "pt-BR", "zh-CN"];
     if (lang && availableLangs.includes(lang)) {
       this.loadImage("egg-update_"+lang, "events");
     } else {
